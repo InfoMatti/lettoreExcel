@@ -24,7 +24,7 @@ public class CompileExcel {
         System.out.println("scrivi il percorso del file destinazione");
         String percorsoDanea =scan.next();
         CompilaFile ciao=new CompilaFile(percorsoDanea,percorsoKonta);
-        ciao.inserisciDati();
+        //ciao.inserisciDati();
     }
     
 }

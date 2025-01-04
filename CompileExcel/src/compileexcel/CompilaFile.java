@@ -16,27 +16,21 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
  */
 class CompilaFile {
      FileInputStream fileDanea;
-    HSSFWorkbook fD;
     FileInputStream fileKonta;
     HSSFWorkbook fK;
-    HSSFSheet sheetD;
     HSSFSheet sheetK;
     String percorsoKonta;
+    String percorsoDanea;
         
     public CompilaFile(String percorsoKonta,String percorsoDanea) throws FileNotFoundException, IOException{
         this.percorsoKonta=percorsoKonta;
         this.fileKonta = new  FileInputStream(new File(percorsoKonta/*"D:\\LavoroPapa\\ImportUnitàImmobiliare.xls"*/));
         this.fK = new HSSFWorkbook(fileKonta);
         this.sheetK = fK.getSheetAt(0);
-        
-        this.fileDanea =new  FileInputStream(new File(percorsoDanea/*"D:\\LavoroPapa\\FileDanea.xls"*/));
-        this.fD = new HSSFWorkbook(fileDanea);
-        this.sheetD = fD.getSheetAt(0);
-        LetturaFileDanea.contaUtenti(sheetD);
-        creaRighe();
+        this.percorsoDanea=percorsoDanea;
     }
     
-    public void inserisciDati() throws IOException{
+    /*public void inserisciDati() throws IOException{
         setScalaNumAlloggio();
         setNomeUtente();
         setCF();
@@ -112,7 +106,7 @@ class CompilaFile {
             sheetK.getRow(i).createCell((short)9).setCellValue(LetturaFileDanea.getScala(sheetD).get(j));
             j++;
         }        
-    }
+    }*/
     
     private void salvaFile(){
         try (FileOutputStream fos = new FileOutputStream(percorsoKonta/*"D:\\LavoroPapa\\ImportUnitàImmobiliare.xls"*/)) {
