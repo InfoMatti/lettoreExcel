@@ -1,7 +1,7 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+* Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+* Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+*/
 package compileexcel;
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,95 +19,85 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
  */
 public class LetturaFileDanea {
     
-        FileInputStream fileDanea;
-        HSSFWorkbook fD;
-        HSSFSheet  sheet;
-        
-        public LetturaFileDanea(String percorsoDanea) throws FileNotFoundException, IOException{
-            this.fileDanea =new  FileInputStream(new File(percorsoDanea/*"D:\\LavoroPapa\\FileDanea.xls"*/));
-            this.fD = new HSSFWorkbook(fileDanea);
-            this.sheet = fD.getSheetAt(0);
+    HSSFSheet  sheet;
+    
+    public LetturaFileDanea(HSSFSheet  sheet) throws FileNotFoundException, IOException{
+        this.sheet=sheet;
+    }
+    
+    ArrayList<String> getRuolo() throws IOException{
+        ArrayList<String> ruolo=new ArrayList<String>();
+        for(int i=1;i<GestoreExcel.contaUtenti(sheet);i++){
+            ruolo.add(sheet.getRow(i).getCell((short)7).getStringCellValue());
+            // System.out.println( numAlloggio.get(i-1));
         }
-        int contaUtenti(){
-            int j=1;
-             while(sheet.getRow(j)!= null){
-                 j++;
-            }
-            return j;
+        return ruolo;
+    }
+    
+    ArrayList<String> getScalaNumAlloggio() throws IOException{
+        ArrayList<String> numAlloggio=new ArrayList<String>();
+        for(int i=1;i<GestoreExcel.contaUtenti(sheet);i++){
+            numAlloggio.add(getScala().get(i-1)+getNumApp().get(i-1));
+            // System.out.println( numAlloggio.get(i-1));
         }
-         ArrayList<String> getRuolo() throws IOException{
-           ArrayList<String> ruolo=new ArrayList<String>();     
-           for(int i=1;i<contaUtenti();i++){
-                    ruolo.add(sheet.getRow(i).getCell((short)7).getStringCellValue());
-               // System.out.println( numAlloggio.get(i-1));
-            }
-            return ruolo;
+        return numAlloggio;
+    }
+    
+    ArrayList<String> getNumApp() throws IOException{
+        ArrayList<String> numApp=new ArrayList<String>();
+        for(int i=1;i<GestoreExcel.contaUtenti(sheet);i++){
+            numApp.add(sheet.getRow(i).getCell((short)2).getStringCellValue());
         }
-         
-         ArrayList<String> getScalaNumAlloggio() throws IOException{
-           ArrayList<String> numAlloggio=new ArrayList<String>();     
-           for(int i=1;i<contaUtenti();i++){
-                    numAlloggio.add(getScala().get(i-1)+getNumApp().get(i-1));
-               // System.out.println( numAlloggio.get(i-1));
-            }
-            return numAlloggio;
+        return numApp;
+    }
+    
+    ArrayList<String> getScala() throws IOException{
+        ArrayList<String> scala=new ArrayList<>();
+        for(int i=1;i<GestoreExcel.contaUtenti(sheet);i++){
+            scala.add(sheet.getRow(i).getCell((short)1).getStringCellValue());
         }
-        
-         ArrayList<String> getNumApp() throws IOException{
-            ArrayList<String> numApp=new ArrayList<String>();
-            for(int i=1;i<contaUtenti();i++){
-                numApp.add(sheet.getRow(i).getCell((short)2).getStringCellValue());
-            }
-            return numApp;
+        return scala;
+    }
+    
+    ArrayList<String> getNome() throws IOException{
+        ArrayList<String> nomeProprietario=new ArrayList<String>();
+        for(int i=1;i<GestoreExcel.contaUtenti(sheet);i++){
+            nomeProprietario.add(sheet.getRow(i).getCell((short)9).getStringCellValue());
+            //System.out.println( nomeUtente.get(i-1));
         }
-        
-         ArrayList<String> getScala(){
-            ArrayList<String> scala=new ArrayList<>();
-            for(int i=1;i<contaUtenti();i++){
-                scala.add(sheet.getRow(i).getCell((short)1).getStringCellValue());
-            }
-            return scala;
+        return nomeProprietario;
+    }
+    
+    ArrayList<String> getCF() throws IOException{
+        ArrayList<String> CF=new ArrayList<String>();
+        for(int i=1;i<GestoreExcel.contaUtenti(sheet);i++){
+            CF.add(sheet.getRow(i).getCell((short)22).getStringCellValue());
+            //System.out.println( CF.get(CF.size()-1));
         }
-        
-         ArrayList<String> getNome(){
-            ArrayList<String> nomeProprietario=new ArrayList<String>();
-            for(int i=1;i<contaUtenti();i++){
-                    nomeProprietario.add(sheet.getRow(i).getCell((short)9).getStringCellValue());
-                //System.out.println( nomeUtente.get(i-1));
-            }
-            return nomeProprietario;
+        return CF;
+    }
+    
+    ArrayList<String> getNumTell() throws IOException{
+        ArrayList<String> numTell=new ArrayList<String>();
+        for(int i=1;i<GestoreExcel.contaUtenti(sheet);i++){
+            numTell.add(sheet.getRow(i).getCell((short)24).getStringCellValue());
+            //System.out.println( numTell.get(numTell.size()-1));
         }
-
-         ArrayList<String> getCF(){
-              ArrayList<String> CF=new ArrayList<String>();
-              for(int i=1;i<contaUtenti();i++){
-                    CF.add(sheet.getRow(i).getCell((short)22).getStringCellValue());  
-                   //System.out.println( CF.get(CF.size()-1));
-              }
-              return CF;
+        return numTell;
+    }
+    
+    ArrayList<String> getEmail() throws IOException{
+        ArrayList<String> email=new ArrayList<String>();
+        for(int i=1;i<GestoreExcel.contaUtenti(sheet);i++){
+            email.add(sheet.getRow(i).getCell((short)28).getStringCellValue());
+            //System.out.println( email.get(email.size()-1));
         }
-        
-         ArrayList<String> getNumTell(){
-              ArrayList<String> numTell=new ArrayList<String>();
-              for(int i=1;i<contaUtenti();i++){
-                    numTell.add(sheet.getRow(i).getCell((short)24).getStringCellValue());  
-                    //System.out.println( numTell.get(numTell.size()-1));
-              }
-              return numTell;
-        }
-        
-         ArrayList<String> getEmail(){
-              ArrayList<String> email=new ArrayList<String>();
-              for(int i=1;i<contaUtenti();i++){
-                    email.add(sheet.getRow(i).getCell((short)28).getStringCellValue());  
-                    //System.out.println( email.get(email.size()-1));
-              }
-              return email;
-        }
-        
-        ArrayList<String> getIndirizzo() {
+        return email;
+    }
+    
+    ArrayList<String> getIndirizzo() throws IOException {
         ArrayList<String> indirizzo = new ArrayList<String>();
-        for (int i = 1; i < contaUtenti(); i++) {
+        for (int i = 1; i < GestoreExcel.contaUtenti(sheet); i++) {
             String fullString = sheet.getRow(i).getCell((short)11).getStringCellValue();
             indirizzo.add(fullString.split("\\d", 2)[0]);
             if(indirizzo.get(indirizzo.size()-1).contains(",")){
@@ -118,20 +108,20 @@ public class LetturaFileDanea {
         return indirizzo;
     }
     
-        ArrayList<String> getCivico() {
+    ArrayList<String> getCivico() throws IOException {
         ArrayList<String> civico = new ArrayList<String>();
         Pattern pattern = Pattern.compile("\\d+");
-        for (int i = 1; i < contaUtenti(); i++) {
-        String fullString = sheet.getRow(i).getCell((short)11).getStringCellValue();
-        Matcher matcher = pattern.matcher(fullString);
-        StringBuilder numeri = new StringBuilder();
-        while (matcher.find()) {
-            numeri.append(matcher.group());
+        for (int i = 1; i < GestoreExcel.contaUtenti(sheet); i++) {
+            String fullString = sheet.getRow(i).getCell((short)11).getStringCellValue();
+            Matcher matcher = pattern.matcher(fullString);
+            StringBuilder numeri = new StringBuilder();
+            while (matcher.find()) {
+                numeri.append(matcher.group());
+            }
+            civico.add(numeri.toString());
+            //System.out.println(civico.get(civico.size() - 1));
         }
-        civico.add(numeri.toString());
-        //System.out.println(civico.get(civico.size() - 1));
-    }
         return civico;
     }
-
+    
 }

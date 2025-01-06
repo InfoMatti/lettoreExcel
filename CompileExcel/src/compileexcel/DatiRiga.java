@@ -5,6 +5,7 @@
 package compileexcel;
 
 import java.io.IOException;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
 
 /**
  *
@@ -21,8 +22,8 @@ public class DatiRiga extends LetturaFileDanea{
     protected String numTell;
     protected String ruolo;
     
-    public DatiRiga(int nRiga,String percorsoDanea) throws IOException{
-        super(percorsoDanea);
+    public DatiRiga(int nRiga,HSSFSheet  sheetD) throws IOException{
+        super(sheetD);
         creaRiga(nRiga);
     }
     
@@ -32,8 +33,8 @@ public class DatiRiga extends LetturaFileDanea{
         cf=getCF().get(nRiga);
         email=getEmail().get(nRiga);
         indirizzo=getIndirizzo().get(nRiga);
-        email=getCivico().get(nRiga);
-        email=getScala().get(nRiga);
+        civico=getCivico().get(nRiga);
+        scala=getScala().get(nRiga);
         numTell=getNumTell().get(nRiga);
         ruolo=getRuolo().get(nRiga);
     }

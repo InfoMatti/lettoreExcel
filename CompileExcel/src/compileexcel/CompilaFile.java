@@ -1,7 +1,7 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+* Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+* Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+*/
 package compileexcel;
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,103 +15,67 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
  * @author matti
  */
 class CompilaFile {
-     FileInputStream fileDanea;
-    FileInputStream fileKonta;
-    HSSFWorkbook fK;
-    HSSFSheet sheetK;
-    String percorsoKonta;
-    String percorsoDanea;
-        
+    private FileInputStream fileDanea;
+    private FileInputStream fileKonta;
+    private HSSFWorkbook fK;
+    private HSSFSheet sheetK;
+    private String percorsoKonta;
+    private String percorsoDanea;
+    private HSSFWorkbook fD;
+    private HSSFSheet  sheetD;
+    
     public CompilaFile(String percorsoKonta,String percorsoDanea) throws FileNotFoundException, IOException{
         this.percorsoKonta=percorsoKonta;
         this.fileKonta = new  FileInputStream(new File(percorsoKonta/*"D:\\LavoroPapa\\ImportUnitàImmobiliare.xls"*/));
         this.fK = new HSSFWorkbook(fileKonta);
         this.sheetK = fK.getSheetAt(0);
         this.percorsoDanea=percorsoDanea;
+        this.fileDanea =new  FileInputStream(new File(percorsoDanea/*"D:\\LavoroPapa\\FileDanea.xls"*/));
+        this.fD = new HSSFWorkbook(fileDanea);
+        this.sheetD = fD.getSheetAt(0);
+        this.sheetK=GestoreExcel.creaRighe(sheetK,sheetD);
     }
     
-    /*public void inserisciDati() throws IOException{
-        setScalaNumAlloggio();
-        setNomeUtente();
-        setCF();
-        setNumTell();
-        setEmail();
-        setIndirizzo();
-        setCivico();
-        setScala();
+    public void inserisciDati() throws IOException{
+        for(int j=0;j<13;j++){
+            for(int i=6;i<GestoreExcel.contaUtenti(sheetD)*6;i=i+6){
+                switch(j){
+                    case 0:
+                        sheetK.getRow(i).createCell((short)j).setCellValue(new DatiRiga(i-6,sheetD).codScala);
+                        break;
+                    case 1:
+                        sheetK.getRow(i).createCell((short)j).setCellValue(new DatiRiga(i-6,sheetD).nome);
+                        break;
+                    case 2:
+                        sheetK.getRow(i).createCell((short)j).setCellValue(new DatiRiga(i-6,sheetD).numTell);
+                        break;
+                    case 5:
+                        sheetK.getRow(i).createCell((short)j).setCellValue(new DatiRiga(i-6,sheetD).cf);
+                        break;
+                    case 6:
+                        sheetK.getRow(i).createCell((short)j).setCellValue(new DatiRiga(i-6,sheetD).email);
+                        break;
+                    case 7:
+                        sheetK.getRow(i).createCell((short)j).setCellValue(new DatiRiga(i-6,sheetD).indirizzo);
+                        break;
+                    case 8:
+                        sheetK.getRow(i).createCell((short)j).setCellValue(new DatiRiga(i-6,sheetD).civico);
+                        break;
+                    case 9:
+                        sheetK.getRow(i).createCell((short)j).setCellValue(new DatiRiga(i-6,sheetD).scala);
+                        break;
+                    case 13:
+                        break;
+                }
+            }
+        }
         salvaFile();
     }
-    private void creaRighe() {
-         for(int i=6;i<LetturaFileDanea.contaUtenti(sheetD)*6;i++){
-            sheetK.createRow(i);
-        }   
-    }
-    private void setScalaNumAlloggio() throws IOException{
-        int j=0;
-        for(int i=6;i<LetturaFileDanea.contaUtenti(sheetD)*6;i=i+6){
-            sheetK.getRow(i).createCell((short)0).setCellValue(LetturaFileDanea.getScalaNumAlloggio(sheetD).get(j));
-            j++;
-        }        
-    }
-    
-    private void setNomeUtente() throws IOException{
-        int j=0;
-        for(int i=6;i<LetturaFileDanea.contaUtenti(sheetD)*6;i=i+6){
-            sheetK.getRow(i).createCell((short)1).setCellValue(LetturaFileDanea.getNomeProprietario(sheetD).get(j));
-            j++;
-        }        
-    }
-    
-    private void setCF() throws IOException{
-        int j=0;
-        for(int i=6;i<LetturaFileDanea.contaUtenti(sheetD)*6;i=i+6){
-            sheetK.getRow(i).createCell((short)5).setCellValue(LetturaFileDanea.getCF(sheetD).get(j));
-            j++;
-        }        
-    }
-    
-    private void setNumTell() throws IOException{
-        int j=0;
-        for(int i=6;i<LetturaFileDanea.contaUtenti(sheetD)*6;i=i+6){
-            sheetK.getRow(i).createCell((short)2).setCellValue(LetturaFileDanea.getNumTell(sheetD).get(j));
-            j++;
-        }        
-    }
-    private void setEmail() throws IOException{
-        int j=0;
-        for(int i=6;i<LetturaFileDanea.contaUtenti(sheetD)*6;i=i+6){
-            sheetK.getRow(i).createCell((short)6).setCellValue(LetturaFileDanea.getEmail(sheetD).get(j));
-            j++;
-        }        
-    }
-     private void setIndirizzo() throws IOException{
-        int j=0;
-        for(int i=6;i<LetturaFileDanea.contaUtenti(sheetD)*6;i=i+6){
-            sheetK.getRow(i).createCell((short)7).setCellValue(LetturaFileDanea.getIndirizzo(sheetD).get(j));
-            j++;
-        }        
-    }
-     
-    private void setCivico() throws IOException{
-        int j=0;
-        for(int i=6;i<LetturaFileDanea.contaUtenti(sheetD)*6;i=i+6){
-            sheetK.getRow(i).createCell((short)8).setCellValue(LetturaFileDanea.getCivico(sheetD).get(j));
-            j++;
-        }        
-    }
-    
-    private void setScala() throws IOException{
-        int j=0;
-        for(int i=6;i<LetturaFileDanea.contaUtenti(sheetD)*6;i=i+6){
-            sheetK.getRow(i).createCell((short)9).setCellValue(LetturaFileDanea.getScala(sheetD).get(j));
-            j++;
-        }        
-    }*/
     
     private void salvaFile(){
         try (FileOutputStream fos = new FileOutputStream(percorsoKonta/*"D:\\LavoroPapa\\ImportUnitàImmobiliare.xls"*/)) {
             fK.write(fos);
-           // fK.close(); 
+            // fK.close();
             fileDanea.close();
             //fD.close();
             System.out.println("File salvato correttamente.");
