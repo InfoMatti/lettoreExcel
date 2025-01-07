@@ -14,6 +14,7 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 public class DatiRiga extends LetturaFileDanea{
     protected String codScala;
     protected String nome;
+    protected String inquilino;
     protected String cf;
     protected String email;
     protected String indirizzo;
@@ -24,7 +25,7 @@ public class DatiRiga extends LetturaFileDanea{
     
     public DatiRiga(int nRiga,HSSFSheet  sheetD) throws IOException{
         super(sheetD);
-        creaRiga(nRiga);
+        creaRiga(nRiga-1);
     }
     
     public void creaRiga(int nRiga) throws IOException{
@@ -37,5 +38,9 @@ public class DatiRiga extends LetturaFileDanea{
         scala=getScala().get(nRiga);
         numTell=getNumTell().get(nRiga);
         ruolo=getRuolo().get(nRiga);
+    }
+    
+    public void setInquilino(String inquilino){
+        this.inquilino=inquilino;
     }
 }

@@ -12,10 +12,10 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
  * @author matti
  */
 public class GestoreExcel {
-    static int contaUtenti(HSSFSheet  sheetD) throws IOException{
+   static int contaUtenti(HSSFSheet  sheetD) throws IOException{
         int j=1;
         while(sheetD.getRow(j)!= null){
-            if(new DatiRiga(j,sheetD).ruolo.equals("Pr"))
+            //if(new DatiRiga(j,sheetD).ruolo.equals("Pr"))
                 j++;
         }
         return j;
