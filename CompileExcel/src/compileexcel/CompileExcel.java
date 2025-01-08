@@ -18,12 +18,12 @@ public class CompileExcel {
      * @param args the command line arguments
      */
      public static void main(String[] args) throws FileNotFoundException, IOException {
-       /* Scanner scan=new Scanner(System.in);
+        Scanner scan=new Scanner(System.in);
         System.out.println("scrivi il percorso del file sorgente");
         String percorsoKonta =scan.next();
         System.out.println("scrivi il percorso del file destinazione");
-        String percorsoDanea =scan.next();*/
-        CompilaFile ciao=new CompilaFile("D:\\LavoroPapa\\ImportUnitaImmobiliare.xls","D:\\LavoroPapa\\FileDanea.xls");
+        String percorsoDanea =scan.next();
+        CompilaFile ciao=new CompilaFile(percorsoKonta,percorsoDanea);
         ciao.inserisciDati();
     }
     

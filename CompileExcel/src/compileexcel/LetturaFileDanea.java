@@ -32,6 +32,15 @@ public class LetturaFileDanea {
         return ruolo;
     }
     
+    ArrayList<String> getPiano() throws IOException{
+        ArrayList<String> piano=new ArrayList<String>();
+        for(int i=1;i<GestoreExcel.contaUtenti(sheet,false)+1;i++){
+            piano.add(sheet.getRow(i).getCell((short)3).getStringCellValue());
+            // System.out.println( numAlloggio.get(i-1));
+        }
+        return piano;
+    }
+    
     ArrayList<String> getScalaNumAlloggio() throws IOException{
         ArrayList<String> numAlloggio=new ArrayList<String>();
         for(int i=1;i<GestoreExcel.contaUtenti(sheet,false)+1;i++){

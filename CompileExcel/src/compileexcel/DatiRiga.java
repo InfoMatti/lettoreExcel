@@ -22,6 +22,7 @@ public class DatiRiga extends LetturaFileDanea{
     protected String scala;
     protected String numTell;
     protected String ruolo;
+    protected String piano;
     
     public DatiRiga(int nRiga,HSSFSheet  sheetD) throws IOException{
         super(sheetD);
@@ -38,6 +39,7 @@ public class DatiRiga extends LetturaFileDanea{
         scala=getScala().get(nRiga);
         numTell=getNumTell().get(nRiga);
         ruolo=getRuolo().get(nRiga);
+        piano=getPiano().get(nRiga);
     }
     
     public void setInquilino(String inquilino){

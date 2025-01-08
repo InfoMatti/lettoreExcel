@@ -92,6 +92,9 @@ class CompilaFile {
                     case 9:
                         sheetK.getRow(i).createCell((short)j).setCellValue(inserimentoInquilini().get(i/6-1).scala);
                         break;
+                     case 10:
+                        sheetK.getRow(i).createCell((short)j).setCellValue(inserimentoInquilini().get(i/6-1).piano);
+                        break;    
                     case 13:
                         break;
                 }
