@@ -25,7 +25,7 @@ public class LetturaFileDanea {
     
     ArrayList<String> getRuolo() throws IOException{
         ArrayList<String> ruolo=new ArrayList<String>();
-        for(int i=1;i<GestoreExcel.contaUtenti(sheet);i++){
+        for(int i=1;i<GestoreExcel.contaUtenti(sheet,false)+1;i++){
             ruolo.add(sheet.getRow(i).getCell((short)7).getStringCellValue());
             // System.out.println( numAlloggio.get(i-1));
         }
@@ -34,7 +34,7 @@ public class LetturaFileDanea {
     
     ArrayList<String> getScalaNumAlloggio() throws IOException{
         ArrayList<String> numAlloggio=new ArrayList<String>();
-        for(int i=1;i<GestoreExcel.contaUtenti(sheet);i++){
+        for(int i=1;i<GestoreExcel.contaUtenti(sheet,false)+1;i++){
             numAlloggio.add(getScala().get(i-1)+getNumApp().get(i-1));
             // System.out.println( numAlloggio.get(i-1));
         }
@@ -43,7 +43,7 @@ public class LetturaFileDanea {
     
     ArrayList<String> getNumApp() throws IOException{
         ArrayList<String> numApp=new ArrayList<String>();
-        for(int i=1;i<GestoreExcel.contaUtenti(sheet);i++){
+        for(int i=1;i<GestoreExcel.contaUtenti(sheet,false)+1;i++){
             numApp.add(sheet.getRow(i).getCell((short)2).getStringCellValue());
         }
         return numApp;
@@ -51,7 +51,7 @@ public class LetturaFileDanea {
     
     ArrayList<String> getScala() throws IOException{
         ArrayList<String> scala=new ArrayList<>();
-        for(int i=1;i<GestoreExcel.contaUtenti(sheet);i++){
+        for(int i=1;i<GestoreExcel.contaUtenti(sheet,false)+1;i++){
             scala.add(sheet.getRow(i).getCell((short)1).getStringCellValue());
         }
         return scala;
@@ -59,7 +59,7 @@ public class LetturaFileDanea {
     
     ArrayList<String> getNome() throws IOException{
         ArrayList<String> nomeProprietario=new ArrayList<String>();
-        for(int i=1;i<GestoreExcel.contaUtenti(sheet);i++){
+        for(int i=1;i<GestoreExcel.contaUtenti(sheet,false)+1;i++){
             nomeProprietario.add(sheet.getRow(i).getCell((short)9).getStringCellValue());
             //System.out.println( nomeUtente.get(i-1));
         }
@@ -68,7 +68,7 @@ public class LetturaFileDanea {
     
     ArrayList<String> getCF() throws IOException{
         ArrayList<String> CF=new ArrayList<String>();
-        for(int i=1;i<GestoreExcel.contaUtenti(sheet);i++){
+        for(int i=1;i<GestoreExcel.contaUtenti(sheet,false)+1;i++){
             CF.add(sheet.getRow(i).getCell((short)22).getStringCellValue());
             //System.out.println( CF.get(CF.size()-1));
         }
@@ -77,7 +77,7 @@ public class LetturaFileDanea {
     
     ArrayList<String> getNumTell() throws IOException{
         ArrayList<String> numTell=new ArrayList<String>();
-        for(int i=1;i<GestoreExcel.contaUtenti(sheet);i++){
+        for(int i=1;i<GestoreExcel.contaUtenti(sheet,false)+1;i++){
             numTell.add(sheet.getRow(i).getCell((short)24).getStringCellValue());
             //System.out.println( numTell.get(numTell.size()-1));
         }
@@ -86,7 +86,7 @@ public class LetturaFileDanea {
     
     ArrayList<String> getEmail() throws IOException{
         ArrayList<String> email=new ArrayList<String>();
-        for(int i=1;i<GestoreExcel.contaUtenti(sheet);i++){
+        for(int i=1;i<GestoreExcel.contaUtenti(sheet,false)+1;i++){
             email.add(sheet.getRow(i).getCell((short)28).getStringCellValue());
             //System.out.println( email.get(email.size()-1));
         }
@@ -95,7 +95,7 @@ public class LetturaFileDanea {
     
     ArrayList<String> getIndirizzo() throws IOException {
         ArrayList<String> indirizzo = new ArrayList<String>();
-        for (int i = 1; i < GestoreExcel.contaUtenti(sheet); i++) {
+        for (int i = 1; i < GestoreExcel.contaUtenti(sheet,false)+1; i++) {
             String fullString = sheet.getRow(i).getCell((short)11).getStringCellValue();
             indirizzo.add(fullString.split("\\d", 2)[0]);
             if(indirizzo.get(indirizzo.size()-1).contains(",")){
@@ -109,7 +109,7 @@ public class LetturaFileDanea {
     ArrayList<String> getCivico() throws IOException {
         ArrayList<String> civico = new ArrayList<String>();
         Pattern pattern = Pattern.compile("\\d+");
-        for (int i = 1; i < GestoreExcel.contaUtenti(sheet); i++) {
+        for (int i = 1; i < GestoreExcel.contaUtenti(sheet,false)+1; i++) {
             String fullString = sheet.getRow(i).getCell((short)11).getStringCellValue();
             Matcher matcher = pattern.matcher(fullString);
             StringBuilder numeri = new StringBuilder();

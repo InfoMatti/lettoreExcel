@@ -25,7 +25,7 @@ public class DatiRiga extends LetturaFileDanea{
     
     public DatiRiga(int nRiga,HSSFSheet  sheetD) throws IOException{
         super(sheetD);
-        creaRiga(nRiga-1);
+        creaRiga(nRiga);
     }
     
     public void creaRiga(int nRiga) throws IOException{
